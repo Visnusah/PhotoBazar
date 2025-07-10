@@ -1,70 +1,147 @@
-# Getting Started with Create React App
+# PhotoBazaar - Photography Marketplace
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern photography marketplace built with React, Node.js, Sequelize ORM, and PostgreSQL.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+### Frontend (React + Vite)
+- 🎨 Modern UI with Tailwind CSS
+- 🔐 User authentication and authorization
+- 🖼️ Photo browsing and filtering
+- 🛒 Photo purchasing system
+- 👤 User profiles and portfolios
+- 📱 Responsive design
+- ⚡ Fast performance with Vite
 
-### `npm start`
+### Backend (Node.js + Express)
+- 🗄️ PostgreSQL database with Sequelize ORM
+- 🔑 JWT-based authentication
+- 📁 File upload with Multer/Cloudinary support
+- 🔍 Advanced search and filtering
+- 💳 Purchase transaction system
+- 👥 User role management (User, Photographer, Admin)
+- 🛡️ Security middleware (Helmet, CORS, Rate limiting)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Project Structure
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```
+photobazaar/
+├── src/                    # Frontend React application
+│   ├── components/         # Reusable UI components
+│   ├── pages/             # Page components
+│   ├── contexts/          # React contexts
+│   └── data/              # Mock data
+├── backend/               # Backend API server
+│   ├── config/            # Database configuration
+│   ├── models/            # Sequelize models
+│   ├── routes/            # API routes
+│   ├── middleware/        # Custom middleware
+│   ├── utils/             # Utility functions
+│   └── seeds/             # Database seeds
+└── public/                # Static assets
+```
 
-### `npm test`
+## Quick Start
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
+- Node.js (v14 or higher)
+- PostgreSQL (v12 or higher)
+- npm or yarn
 
-### `npm run build`
+### Frontend Setup
+```bash
+# Install dependencies
+npm install
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Start development server
+npm run dev
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Backend Setup
+```bash
+# Navigate to backend directory
+cd backend
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Run setup script (will install deps, create DB, and seed data)
+./setup.sh
 
-### `npm run eject`
+# Or manually:
+npm install
+createdb photobazaar
+npm run db:init
+npm run dev
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## API Endpoints
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Authentication
+- `POST /api/auth/register` - Register new user
+- `POST /api/auth/login` - Login user
+- `GET /api/auth/profile` - Get user profile
+- `PUT /api/auth/profile` - Update user profile
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Photos
+- `GET /api/photos` - Get all photos (with filtering)
+- `GET /api/photos/:id` - Get photo by ID
+- `POST /api/photos` - Upload new photo
+- `PUT /api/photos/:id` - Update photo
+- `DELETE /api/photos/:id` - Delete photo
+- `POST /api/photos/:id/like` - Like/unlike photo
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Categories
+- `GET /api/categories` - Get all categories
+- `POST /api/categories` - Create category (Admin)
+- `PUT /api/categories/:id` - Update category (Admin)
+- `DELETE /api/categories/:id` - Delete category (Admin)
 
-## Learn More
+### Purchases
+- `POST /api/purchases` - Purchase a photo
+- `GET /api/purchases` - Get user's purchases
+- `POST /api/purchases/:id/download` - Download purchased photo
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Users
+- `GET /api/users/:id` - Get user by ID
+- `GET /api/users/:id/photos` - Get photos by user
+- `GET /api/users/:id/dashboard` - Get user dashboard stats
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Environment Variables
 
-### Code Splitting
+### Backend (.env)
+```
+PORT=5000
+NODE_ENV=development
+JWT_SECRET=your_jwt_secret
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=photobazaar
+DB_USER=postgres
+DB_PASSWORD=your_password
+CLOUDINARY_CLOUD_NAME=your_cloudinary_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Technologies Used
 
-### Analyzing the Bundle Size
+### Frontend
+- React 18
+- Vite
+- Tailwind CSS
+- React Router DOM
+- Framer Motion
+- Heroicons
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Backend
+- Node.js
+- Express.js
+- Sequelize ORM
+- PostgreSQL
+- JWT
+- Multer
+- Cloudinary
+- Joi (validation)
+- Helmet (security)
 
-### Making a Progressive Web App
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+MIT License
